@@ -1,26 +1,37 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import java.time.Duration;
 
 public class AbstractTest {
-    static Properties prop = new Properties();
-    private static InputStream configFile;
-    private static String baseUrl;
+    public static WebDriver webDriver;
 
     @BeforeAll
-    static void initTest() throws IOException {
-        configFile = new FileInputStream("src/main/resources/my.properties");
-        prop.load(configFile);
+    static void init() {
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        options.addArguments("start-maximized");
 
-        baseUrl=prop.getProperty("base_url");
+        webDriver = new ChromeDriver(options);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+
+        Assertions.assertDoesNotThrow(() -> webDriver.navigate().to("https://test-stand.gb.ru/login"),
+                "Страница не доступна");
     }
 
+    @AfterAll
+    static void close() {
+        webDriver.quit();
+    }
 
-
-    public static String getBaseUrl() {
-        return baseUrl;
+    public WebDriver getWebDriver() {
+        return this.webDriver;
     }
 }
+

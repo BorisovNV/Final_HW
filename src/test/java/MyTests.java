@@ -1,3 +1,4 @@
+import final_project.AbstractTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -8,7 +9,7 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.containsString;
 
-public class MyTests extends AbstractTest  {
+public class MyTests extends AbstractTest {
     @Test
     public void getDataTest() {
         RequestSpecification httpRequest = RestAssured.given().auth().basic("username125", "0918b94410").headers("X-Auth-Token", "7f0c87f55946869603c39d30dac10dba");
