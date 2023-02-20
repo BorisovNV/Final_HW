@@ -1,4 +1,3 @@
-import final_project.AbstractTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -11,8 +10,8 @@ import static org.hamcrest.Matchers.containsString;
 
 public class MyTests extends AbstractTest {
     @Test
-    public void getDataTest() {
-        RequestSpecification httpRequest = RestAssured.given().auth().basic("username125", "0918b94410").headers("X-Auth-Token", "7f0c87f55946869603c39d30dac10dba");
+    public void get_Data_Test() {
+        RequestSpecification httpRequest = RestAssured.given().auth().basic("username110", "0918b94410").headers("X-Auth-Token", "6a6255fc67cf5ecad836e00f2be275d1");
         Response res = httpRequest.get("https://test-stand.gb.ru/api/posts");
         ResponseBody body = res.body();
         String rbdy = body.asString();
@@ -20,10 +19,10 @@ public class MyTests extends AbstractTest {
 
     }
     @Test
-    void getOneTest(){
+    void get_First_Test(){
         RestAssured.given()
                 .log().all()
-                .headers("X-Auth-Token", "7f0c87f55946869603c39d30dac10dba")
+                .headers("X-Auth-Token", "6a6255fc67cf5ecad836e00f2be275d1")
 
                 .when()
                 .contentType(ContentType.JSON)
@@ -40,10 +39,10 @@ public class MyTests extends AbstractTest {
 
     }
     @Test
-    void getTwoTest(){
+    void get_Second_Test(){
         RestAssured.given()
                 .log().all()
-                .headers("X-Auth-Token", "7f0c87f55946869603c39d30dac10dba")
+                .headers("X-Auth-Token", "6a6255fc67cf5ecad836e00f2be275d1")
 
                 .when()
                 .contentType(ContentType.JSON)
@@ -58,10 +57,10 @@ public class MyTests extends AbstractTest {
                 .statusLine(containsString("OK"));
     }
     @Test
-    void getThreeTest(){
+    void get_Third_Test(){
         RestAssured.given()
                 .log().all()
-                .headers("X-Auth-Token", "7f0c87f55946869603c39d30dac10dba")
+                .headers("X-Auth-Token", "6a6255fc67cf5ecad836e00f2be275d1")
 
                 .when()
                 .contentType(ContentType.JSON)
@@ -76,10 +75,10 @@ public class MyTests extends AbstractTest {
                 .statusLine(containsString("OK"));
     }
     @Test
-    void getFourTest(){
+    void get_Fourth_Test(){
         RestAssured.given()
                 .log().all()
-                .headers("X-Auth-Token", "7f0c87f55946869603c39d30dac10dba")
+                .headers("X-Auth-Token", "6a6255fc67cf5ecad836e00f2be275d1")
 
                 .when()
                 .contentType(ContentType.JSON)
@@ -95,10 +94,10 @@ public class MyTests extends AbstractTest {
 
     }
     @Test
-    void IncorrectCredentialsTest(){
+    void Incorrect_Data_Test(){
         RestAssured.given()
                 .log().all()
-                .headers("X-Auth-Token", "7f0c87f55946869603c39d30dac1d0dba")
+                .headers("X-Auth-Token", "6a6255fc67cf5axcd836e00f2be275d1")
                 .when()
                 .contentType(ContentType.JSON)
                 .get("https://test-stand.gb.ru/api/posts")
